@@ -3,10 +3,9 @@ import React from "react";
 
 function OrganizationIdPage() {
   return (
-    <div>
-      {/* Navbar */}
-      <Navbar />
-    </div>
+    <>
+      <div className="h-full">OrganizationIdPage</div>
+    </>
   );
 }
 
