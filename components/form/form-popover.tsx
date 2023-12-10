@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import { useAction } from "@/hooks/use-action";
 import { Button } from "@/components/ui/button";
-// import { createBoard } from "@/actions/create-board";
+import { createBoard } from "@/actions/create-board";
 // import { useProModal } from "@/hooks/use-pro-modal";
 
 import { FormInput } from "./form-input";
@@ -36,23 +36,23 @@ export const FormPopover = ({
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
 
-  // const { execute, fieldErrors } = useAction(createBoard, {
-  //   onSuccess: (data) => {
-  //     toast.success("Board created!");
-  //     closeRef.current?.click();
-  //     router.push(`/board/${data.id}`);
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error);
-  //     proModal.onOpen();
-  //   },
-  // });
+  const { execute, fieldErrors } = useAction(createBoard, {
+    onSuccess: (data) => {
+      toast.success("Board created!");
+      closeRef.current?.click();
+      router.push(`/board/${data.id}`);
+    },
+    onError: (error) => {
+      toast.error(error);
+      // proModal.onOpen();
+    },
+  });
 
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
     const image = formData.get("image") as string;
 
-    // execute({ title, image });
+    execute({ title, image });
   };
 
   return (
@@ -76,15 +76,15 @@ export const FormPopover = ({
           </Button>
         </div>
         <form action={onSubmit} className="space-y-4">
-          {/* <div className="space-y-4"> */}
-          {/* <FormPicker id="image" errors={fieldErrors} />
+          <div className="space-y-4">
+          <FormPicker id="image" errors={fieldErrors} />
             <FormInput
               id="title"
               label="Board title"
               type="text"
               errors={fieldErrors}
             />
-          </div> */}
+          </div>
           <FormSubmit className="w-full">Create</FormSubmit>
         </form>
       </PopoverContent>
