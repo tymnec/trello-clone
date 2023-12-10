@@ -34,7 +34,7 @@ export const Navbar = () => {
           </Button>
         </FormPopover>
       </div>
-      <div className="ml-auto flex items-center gap-x-2 mr-2">
+      <div className="ml-auto flex items-center gap-x-2">
         <OrganizationSwitcher
           hidePersonal
           afterCreateOrganizationUrl="/organization/:id"

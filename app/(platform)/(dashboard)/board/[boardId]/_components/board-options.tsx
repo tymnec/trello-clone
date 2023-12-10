@@ -12,6 +12,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import { PopoverClose } from "@radix-ui/react-popover";
+
 interface BoardOptionsProps {
   id: string;
 }
@@ -30,7 +32,7 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="h-auto w-auto p-2" variant="ghost">
+        <Button className="h-auto w-auto p-2" variant="destructive">
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
@@ -38,14 +40,14 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           Board actions
         </div>
-        <div>
+        <PopoverClose asChild>
           <Button
             className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
             variant="ghost"
           >
             <X className="h-4 w-4" />
           </Button>
-        </div>
+        </PopoverClose>
         <Button
           variant="ghost"
           onClick={onDelete}

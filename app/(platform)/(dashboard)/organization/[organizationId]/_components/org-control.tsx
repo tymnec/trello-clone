@@ -11,8 +11,10 @@ export const OrgControl = () => {
   useEffect(() => {
     if (!setActive) return;
 
-    setActive({ organization: params.organizationId as string });
+    setActive({
+      organization: params.organizationId as string,
+    });
   }, [setActive, params.organizationId]);
-
+  
   return null;
 };

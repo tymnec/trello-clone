@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
@@ -17,8 +17,8 @@ export const ActivityList = async () => {
       orgId,
     },
     orderBy: {
-      createdAt: "desc",
-    },
+      createdAt: "desc"
+    }
   });
 
   return (

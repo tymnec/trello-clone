@@ -14,9 +14,9 @@ export const MobileSidebar = () => {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = useState(false);
 
-  const onOpen = useMobileSidebar((state: any) => state.onOpen);
-  const onClose = useMobileSidebar((state: any) => state.onClose);
-  const isOpen = useMobileSidebar((state: any) => state.isOpen);
+  const onOpen = useMobileSidebar((state) => state.onOpen);
+  const onClose = useMobileSidebar((state) => state.onClose);
+  const isOpen = useMobileSidebar((state) => state.isOpen);
 
   useEffect(() => {
     setIsMounted(true);
