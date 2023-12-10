@@ -15,7 +15,7 @@ import { ListItem } from "./list-item";
 interface ListContainerProps {
   data: ListWithCards[];
   boardId: string;
-};
+}
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   const result = Array.from(list);
@@ -23,12 +23,9 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   result.splice(endIndex, 0, removed);
 
   return result;
-};
+}
 
-export const ListContainer = ({
-  data,
-  boardId,
-}: ListContainerProps) => {
+export const ListContainer = ({ data, boardId }: ListContainerProps) => {
   const [orderedData, setOrderedData] = useState(data);
 
   const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
@@ -70,11 +67,9 @@ export const ListContainer = ({
 
     // User moves a list
     if (type === "list") {
-      const items = reorder(
-        orderedData,
-        source.index,
-        destination.index,
-      ).map((item, index) => ({ ...item, order: index }));
+      const items = reorder(orderedData, source.index, destination.index).map(
+        (item, index) => ({ ...item, order: index })
+      );
 
       setOrderedData(items);
       executeUpdateListOrder({ items, boardId });
@@ -85,8 +80,12 @@ export const ListContainer = ({
       let newOrderedData = [...orderedData];
 
       // Source and destination list
-      const sourceList = newOrderedData.find(list => list.id === source.droppableId);
-      const destList = newOrderedData.find(list => list.id === destination.droppableId);
+      const sourceList = newOrderedData.find(
+        (list) => list.id === source.droppableId
+      );
+      const destList = newOrderedData.find(
+        (list) => list.id === destination.droppableId
+      );
 
       if (!sourceList || !destList) {
         return;
@@ -107,7 +106,7 @@ export const ListContainer = ({
         const reorderedCards = reorder(
           sourceList.cards,
           source.index,
-          destination.index,
+          destination.index
         );
 
         reorderedCards.forEach((card, idx) => {
@@ -148,25 +147,19 @@ export const ListContainer = ({
         });
       }
     }
-  }
+  };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="lists" type="list" direction="horizontal">
         {(provided) => (
-          <ol 
+          <ol
             {...provided.droppableProps}
-            ref={provided.innerRef}  
+            ref={provided.innerRef}
             className="flex gap-x-3 h-full"
           >
             {orderedData.map((list, index) => {
-              return (
-                <ListItem
-                  key={list.id}
-                  index={index}
-                  data={list}
-                />
-              )
+              return <ListItem key={list.id} index={index} data={list} />;
             })}
             {provided.placeholder}
             <ListForm />
