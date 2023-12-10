@@ -2,10 +2,8 @@
 
 import { auth, currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
-import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
 import { db } from "@/lib/db";
-import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 
 import { StripeRedirect } from "./schema";
@@ -32,7 +30,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     const orgSubscription = await db.orgSubscription.findUnique({
       where: {
         orgId,
-      }
+      },
     });
 
     if (orgSubscription && orgSubscription.stripeCustomerId) {
@@ -56,11 +54,11 @@ const handler = async (data: InputType): Promise<ReturnType> => {
               currency: "USD",
               product_data: {
                 name: "Taskify Pro",
-                description: "Unlimited boards for your organization"
+                description: "Unlimited boards for your organization",
               },
               unit_amount: 2000,
               recurring: {
-                interval: "month"
+                interval: "month",
               },
             },
             quantity: 1,
@@ -73,11 +71,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
       url = stripeSession.url || "";
     }
-  } catch {
+  } catch (error) {
+    console.log("[STRIPE_ERROR]", error);
     return {
-      error: "Something went wrong!"
-    }
-  };
+      error: "Something went wrong!",
+    };
+  }
 
   revalidatePath(`/organization/${orgId}`);
   return { data: url };
