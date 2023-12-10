@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-type MobileSidebarStore = {
+type ProModalStore = {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 };
 
-export  const useMobileSidebar = create<MobileSidebarStore>((set) => ({
+export  const useProModal = create<ProModalStore>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
