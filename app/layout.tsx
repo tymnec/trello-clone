@@ -32,11 +32,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body >{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
